@@ -178,19 +178,19 @@ class AstToCfgConverter[NodeType, EdgeBuilderType, EdgeType](
 
   override def visit(astAND: AndExpression): Unit = {
     astAND.getLeft.accept(this)
-    val entry = fringe
-    fringe = fringe.setCfgEdgeType(TrueEdge)
+    //val entry = fringe
+    //fringe = fringe.setCfgEdgeType(TrueEdge)
     astAND.getRight.accept(this)
-    fringe = fringe.add(entry.setCfgEdgeType(FalseEdge))
+    //fringe = fringe.add(entry.setCfgEdgeType(FalseEdge))
     extendCfg(astAND)
   }
 
   override def visit(astOR: OrExpression): Unit = {
     astOR.getLeft.accept(this)
-    val entry = fringe
-    fringe = fringe.setCfgEdgeType(FalseEdge)
+    //val entry = fringe
+    //fringe = fringe.setCfgEdgeType(FalseEdge)
     astOR.getRight.accept(this)
-    fringe = fringe.add(entry.setCfgEdgeType(TrueEdge))
+    //fringe = fringe.add(entry.setCfgEdgeType(TrueEdge))
     extendCfg(astOR)
   }
 

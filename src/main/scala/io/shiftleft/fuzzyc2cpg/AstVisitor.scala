@@ -2,6 +2,8 @@ package io.shiftleft.fuzzyc2cpg
 
 import java.util
 
+import io.seclab.spider.adapter.CFGAdapter
+import io.seclab.spider.cfg.{CFGNode, ControlFlowGraph}
 import io.shiftleft.fuzzyc2cpg.adapter.ProtoCpgAdapter
 import io.shiftleft.fuzzyc2cpg.ast.{AstNode, AstNodeBuilder}
 import io.shiftleft.fuzzyc2cpg.ast.declarations.ClassDefStatement
@@ -46,6 +48,17 @@ class AstVisitor(outputModuleFactory: CpgOutputModuleFactory,
       new AstToCfgConverter(astToCpgConverter.getMethodNode.get, astToCpgConverter.getMethodReturnNode.get, cpgAdapter)
     astToCfgConverter.convert(functionDef)
 
+    /*val cggraph = new ControlFlowGraph();
+    val cpgAdapter1 = new CFGAdapter(cggraph);
+
+    val nm = new CFGNode("Start:" + functionDef.getName())
+    cggraph.addVertex(nm)
+    val nre = new CFGNode("Ret:" + functionDef.getName())
+    cggraph.addVertex(nre)
+    val astToCfgConverter1 =
+      new AstToCfgConverter(nm, nre, cpgAdapter1)
+    astToCfgConverter1.convert(functionDef)
+    cggraph.dumpGraph()*/
     if (functionDef.isOnlyDeclaration) {
       // Do not persist the declaration. It may be that we encounter a
       // corresponding definition, in which case the declaration will be
